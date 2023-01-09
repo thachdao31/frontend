@@ -9,10 +9,7 @@ import { DeleteUserComponent } from './components/delete-user/delete-user.compon
 const routes: Routes = [
   {path: '', redirectTo: 'list-user', pathMatch: 'full'},
   {path: 'add', component: AddUserComponent},
-  {path: 'list-user', component: UserListComponent},
-  {path: 'detail-user/:id', component: UserDetailsComponent},
-  {path: 'edit-user/:id', component: UpdateUserComponent},
-  {path: 'delete-user/:id', component:DeleteUserComponent}
+  {path: 'list-user', component: UserListComponent}
 ];
 
 @NgModule({
