@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { UpdateUserComponent } from './components/update-user/update-user.component';
-import { DeleteUserComponent } from './components/delete-user/delete-user.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -16,9 +14,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     AddUserComponent,
     UserDetailsComponent,
-    UserListComponent,
-    UpdateUserComponent,
-    DeleteUserComponent
+    UserListComponent
   ],
   imports: [
     BrowserModule,
