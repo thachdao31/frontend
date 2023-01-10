@@ -1,26 +1,23 @@
-<div class="container">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2 class="h2">Users List</h2>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Age</th>
-          <th scope="col">Class</th>
-          <th class="text-center" scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users; let i = index">
-          <th scope="row">{{user._id}}</th>
-          <td>{{user.name}}</td>
-          <td>{{user.age}}</td>
-          <td>{{user.class}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="col-md-6">
+  <h4>Users List</h4>
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let user of users; let i = index"
+      [class.active]="i == currentIndex"
+      (click)="setActiveUser(user, i)"
+    >
+      {{ user.name }}
+    </li>
+  </ul>
+
+  <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+    Remove All
+  </button>
+</div>
+<div class="col-md-6">
+  <app-user-details
+    [viewMode]="true"
+    [currentUser]="currentUser"
+  ></app-user-details>
 </div>

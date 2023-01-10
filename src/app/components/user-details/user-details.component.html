@@ -1,1 +1,85 @@
-<p>user-details works!</p>
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentUser._id">
+    <h4>User</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentUser.name }}
+    </div>
+    <div>
+      <label><strong>Age:</strong></label>
+      {{ currentUser.age }}
+    </div>
+    <div>
+      <label><strong>Class:</strong></label>
+      {{ currentUser.class}}
+    </div>
+
+    <a
+      class="badge badge-warning"
+      routerLink="/users/{{ currentUser._id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentUser">
+    <br />
+    <p>Please click on a User...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentUser._id" class="edit-form">
+    <h4>Name</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentUser.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input
+          type="text"
+          class="form-control"
+          id="age"
+          [(ngModel)]="currentUser.age"
+          name="age"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="class">Class</label>
+        <input
+          type="text"
+          class="form-control"
+          id="class"
+          [(ngModel)]="currentUser.class"
+          name="class"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteUser()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateUser()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentUser._id">
+    <br />
+    <p>Cannot access this User...</p>
+  </div>
+</ng-template>
