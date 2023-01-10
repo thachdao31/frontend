@@ -44,7 +44,16 @@ export class UserDetailsComponent implements OnInit {
   }
 
   updateUser(): void {
-    
+    this.message = '';
+
+    this.userService.update(this.currentUser._id, this.currentUser)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.message = res.message ? res.message : 'This tutorial was updated successfully!';
+        },
+        error: (e) => console.error(e)
+      });
   }
 
   deleteUser(): void {
