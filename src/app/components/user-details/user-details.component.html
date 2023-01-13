@@ -2,6 +2,9 @@
   <div *ngIf="currentUser._id">
     <h4>User</h4>
     <div>
+      <label><strong>Id:</strong></label> {{ currentUser._id }}
+    </div>
+    <div>
       <label><strong>Name:</strong></label> {{ currentUser.name }}
     </div>
     <div>
@@ -15,7 +18,7 @@
 
     <a
       class="badge badge-warning"
-      routerLink="/users/{{ currentUser._id }}"
+      routerLink="/edit/{{ currentUser._id }}"
     >
       Edit
     </a>
@@ -29,7 +32,7 @@
 
 <ng-template #editable>
   <div *ngIf="currentUser._id" class="edit-form">
-    <h4>Name</h4>
+    <h4>User</h4>
     <form>
       <div class="form-group">
         <label for="name">Name</label>
@@ -69,7 +72,6 @@
     </button>
 
     <button
-      type="submit"
       class="badge badge-success mb-2"
       (click)="updateUser()"
     >

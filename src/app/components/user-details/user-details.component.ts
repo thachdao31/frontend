@@ -12,6 +12,7 @@ export class UserDetailsComponent implements OnInit {
   @Input() viewMode = false;
 
   @Input() currentUser: User = {
+    _id: '',
     name: '',
     age: 0,
     class: ''
@@ -44,13 +45,20 @@ export class UserDetailsComponent implements OnInit {
   }
 
   updateUser(): void {
+    const data = {
+      name: this.currentUser.name,
+      age: this.currentUser.age,
+      class: this.currentUser.class
+    }
+
     this.message = '';
 
-    this.userService.update(this.currentUser._id, this.currentUser)
+    this.userService.update(this.currentUser._id, data)
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.message = res.message ? res.message : 'This tutorial was updated successfully!';
+          this.message = res.message ? res.message : 'updated successfully!';
+          this.router.navigate(['/']);
         },
         error: (e) => console.error(e)
       });
