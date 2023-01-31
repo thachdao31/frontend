@@ -1,5 +1,5 @@
 
-  <nz-table #user [nzData]="users">
+  <nz-table #userListTable [nzData]="users">
     <thead>
       <tr>
         <th>Name</th>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of userListTable.data">
         <td>{{user.name}}</td>
         <td>{{user.age}}</td>
         <td>{{user.class}}</td>
@@ -19,9 +19,16 @@
         >
           Edit
         </a>
-        <button class="badge badge-danger mr-2" (click)="deleteUser(user._id)">
-          Delete
-        </button>
+        <button
+        nz-popconfirm
+        nzPopconfirmTitle="Are you sure delete this task?"
+        (nzOnConfirm)="confirm()"
+        (nzOnCancel)="cancel()"
+        nzPopconfirmPlacement="rightTop"
+        nz-button
+      >
+        RT
+      </button>
       </td>
       </tr>
     </tbody>

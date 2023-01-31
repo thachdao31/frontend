@@ -59,4 +59,12 @@ export class UserListComponent implements OnInit {
           error: (err) => console.log(err)
         });
   }
+
+  confirm(): void {
+    
+  }
+
+  cancel(): void {
+
+  }
 }
