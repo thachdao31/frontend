@@ -9,18 +9,23 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { UserListComponent } from './components/user-list/user-list.component';
 import { FormsModule } from '@angular/forms';
 
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
-    UserDetailsComponent,
-    UserListComponent
+    UserListComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NzTableModule,
+    NzButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
