@@ -1,14 +1,32 @@
-<div class="col-md-6">
-  <h4>Users List</h4>
+
+  <nz-table #user [nzData]="users">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Class</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.class}}</td>
+        <td><a
+          class="badge badge-warning"
+          routerLink="/edit/{{ user._id }}"
+        >
+          Edit
+        </a>
+        <button class="badge badge-danger mr-2" (click)="deleteUser(user._id)">
+          Delete
+        </button>
+      </td>
+      </tr>
+    </tbody>
+  </nz-table>
 
 
-
-</div>
-<div class="col-md-6">
-  <app-user-details
-    [viewMode]="true"
-    [currentUser]="currentUser"
-  ></app-user-details>
-</div>
 
 

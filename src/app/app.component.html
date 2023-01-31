@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">CRUD User</a>
     <div class="navbar-nav mr-auto">
@@ -14,4 +14,13 @@
   <div class="container mt-3">
     <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+
+<nz-layout>
+  <nz-layout>
+    <app-header></app-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

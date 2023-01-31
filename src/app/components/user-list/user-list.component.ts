@@ -8,11 +8,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users?: User[];
+  users: any;
   currentUser : User = {};
   currentIndex = -1;
 
-  constructor(private userServices: UserService) {}
+  constructor(
+    private userServices: UserService,
+
+    ) {}
 
   ngOnInit(): void {
     this.retrieveUsers();
@@ -35,11 +38,6 @@ export class UserListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveUser(user: User, index: number): void {
-    this.currentUser = user,
-    this.currentIndex = index
-  }
-
   removeAllUsers(): void {
     this.userServices.deleteAll()
         .subscribe({
@@ -49,5 +47,16 @@ export class UserListComponent implements OnInit {
           },
           error: (err) => console.log(err)
         })
+  }
+
+  deleteUser(id: string): void {
+    this.userServices.delete(id)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            this.refreshList();
+          },
+          error: (err) => console.log(err)
+        });
   }
 }

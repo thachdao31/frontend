@@ -11,13 +11,18 @@ import { FormsModule } from '@angular/forms';
 
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { HeaderComponent } from './header/header.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
     UserListComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     FormsModule,
     HttpClientModule,
     NzTableModule,
-    NzButtonModule
+    NzButtonModule,
+    NzDividerModule,
+    NzLayoutModule,
+    NzMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
