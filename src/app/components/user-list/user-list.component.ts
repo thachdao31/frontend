@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -9,20 +10,37 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserListComponent implements OnInit {
   users: any;
-  currentUser : User = {};
+  @Input() currentUser: User = {
+    _id: '',
+    name: '',
+    age: 0,
+    class: ''
+  };
   currentIndex = -1;
 
   constructor(
-    private userServices: UserService,
-
+    private userService: UserService,
+    private route: ActivatedRoute
     ) {}
 
   ngOnInit(): void {
     this.retrieveUsers();
+    this.getUser("63d8de599192774fce16adf5");
+  }
+
+  getUser(id: string): void {
+    this.userService.get(id)
+        .subscribe({
+          next: (data) => {
+            this.currentUser = data;
+            console.log(data);
+          },
+          error: (err) => console.log(err)
+        });
   }
 
   retrieveUsers(): void {
-    this.userServices.getAll()
+    this.userService.getAll()
         .subscribe({
           next:(data) => {
             this.users = data;
@@ -39,7 +57,7 @@ export class UserListComponent implements OnInit {
   }
 
   removeAllUsers(): void {
-    this.userServices.deleteAll()
+    this.userService.deleteAll()
         .subscribe({
           next: (res) => {
             console.log(res);
@@ -50,7 +68,7 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id: string): void {
-    this.userServices.delete(id)
+    this.userService.delete(id)
         .subscribe({
           next: (res) => {
             console.log(res);
@@ -60,11 +78,10 @@ export class UserListComponent implements OnInit {
         });
   }
 
-  confirm(): void {
-    
-  }
-
   cancel(): void {
 
   }
+
+
+  
 }

@@ -1,4 +1,4 @@
-
+<h4>List User</h4>
   <nz-table #userListTable [nzData]="users">
     <thead>
       <tr>
@@ -8,26 +8,26 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
       <tr *ngFor="let user of userListTable.data">
         <td>{{user.name}}</td>
         <td>{{user.age}}</td>
         <td>{{user.class}}</td>
-        <td><a
-          class="badge badge-warning"
-          routerLink="/edit/{{ user._id }}"
-        >
-          Edit
-        </a>
+        <td>
+          <button nz-button [nzType]="'primary'" routerLink="/edit/{{user._id }}"><span>Edit</span></button>
+
+
         <button
+        nzType="primary"
         nz-popconfirm
-        nzPopconfirmTitle="Are you sure delete this task?"
-        (nzOnConfirm)="confirm()"
+        nzPopconfirmTitle="Are you sure delete this user?"
+        (nzOnConfirm)="deleteUser(user._id)"
         (nzOnCancel)="cancel()"
         nzPopconfirmPlacement="rightTop"
         nz-button
+        nzDanger
       >
-        RT
+        Delete
       </button>
       </td>
       </tr>

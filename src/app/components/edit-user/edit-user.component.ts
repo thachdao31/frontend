@@ -1,14 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { Component, Input } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Observer } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-user-details',
-  templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class UserDetailsComponent implements OnInit {
+
+export class EditUserComponent {
   @Input() viewMode = false;
 
   @Input() currentUser: User = {
@@ -20,16 +23,25 @@ export class UserDetailsComponent implements OnInit {
 
   message = '';
 
+  validateForm: UntypedFormGroup;
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: UntypedFormBuilder
+  ) {
+    this.validateForm = this.fb.group({
+      name: [null, [Validators.required, Validators.pattern] ],
+      age: ['', [Validators.required]],
+      class: ['', [Validators.required]]
+    })
+  }
 
   ngOnInit(): void {
     if(!this.viewMode) {
       this.message = '';
-      this.getUser(this.route.snapshot.params["id"]);
+      this.getUser(this.route.snapshot.params['id']);
     }
   }
 
@@ -63,15 +75,5 @@ export class UserDetailsComponent implements OnInit {
         error: (e) => console.error(e)
       });
   }
-
-  deleteUser(): void {
-    this.userService.delete(this.currentUser._id)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            this.router.navigate(['/']);
-          },
-          error: (err) => console.log(err)
-        });
-  }
 }
+
