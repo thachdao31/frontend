@@ -35,7 +35,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     AddUserComponent,
     UserListComponent,
     HeaderComponent,
-    EditUserComponent
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

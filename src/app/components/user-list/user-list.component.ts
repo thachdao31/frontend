@@ -78,10 +78,7 @@ export class UserListComponent implements OnInit {
         });
   }
 
-  cancel(): void {
-
-  }
-
-
   
+
+  cancel(): void {}
 }

@@ -14,9 +14,12 @@
         <td>{{user.age}}</td>
         <td>{{user.class}}</td>
         <td>
-          <button nz-button [nzType]="'primary'" routerLink="/edit/{{user._id }}"><span>Edit</span></button>
-
-
+        <button
+        nz-button
+        [nzType]="'primary'"
+        routerLink="/edit/{{user._id }}">
+          <span>Edit</span>
+        </button>
         <button
         nzType="primary"
         nz-popconfirm
@@ -29,6 +32,12 @@
       >
         Delete
       </button>
+      <button
+        nz-button
+        [nzType]="'primary'"
+        routerLink="/edit/{{user._id }}">
+          <span>Checkin</span>
+        </button>
       </td>
       </tr>
     </tbody>

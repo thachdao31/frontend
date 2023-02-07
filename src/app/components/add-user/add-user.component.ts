@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-
+import { UntypedFormBuilder, UntypedFormGroup, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-user',
@@ -16,7 +16,32 @@ export class AddUserComponent {
   };
   submitted = false;
 
-  constructor(private userServices: UserService) {}
+  validateForm: UntypedFormGroup;
+
+  constructor(
+    private userServices: UserService,
+    private fb: UntypedFormBuilder
+    ) {
+      this.validateForm = this.fb.group({
+        name: ['', [Validators.required, Validators.pattern]],
+        age: ['', [Validators.required, Validators.pattern]],
+        class: ['', [Validators.required]]
+      })
+    }
+
+    submitForm(): void {
+      if (this.validateForm.valid) {
+        this.saveUser()
+        console.log('submit', this.validateForm.value);
+      } else {
+        Object.values(this.validateForm.controls).forEach(control => {
+          if (control.invalid) {
+            control.markAsDirty();
+            control.updateValueAndValidity({ onlySelf: true });
+          }
+        });
+      }
+    }
 
   saveUser(): void {
     const data = {

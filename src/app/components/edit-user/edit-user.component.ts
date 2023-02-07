@@ -32,10 +32,24 @@ export class EditUserComponent {
     private fb: UntypedFormBuilder
   ) {
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern] ],
-      age: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.pattern] ],
+      age: ['', [Validators.required, Validators.pattern]],
       class: ['', [Validators.required]]
     })
+  }
+
+  submitForm(): void {
+    if (this.validateForm.valid) {
+      this.updateUser();
+      console.log('submit', this.validateForm.value);
+    } else {
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   ngOnInit(): void {
