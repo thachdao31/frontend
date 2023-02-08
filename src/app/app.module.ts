@@ -28,6 +28,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { ListUserLateComponent } from './components/list-user-late/list-user-late.component'; 
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     UserListComponent,
     HeaderComponent,
     EditUserComponent,
+    ListUserLateComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzPopconfirmModule,
     NzModalModule,
     NzFormModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzNotificationModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

@@ -35,7 +35,8 @@
       <button
         nz-button
         [nzType]="'primary'"
-        routerLink="/edit/{{user._id }}">
+        (click)="checkinUser(user._id)"
+        >
           <span>Checkin</span>
         </button>
       </td>

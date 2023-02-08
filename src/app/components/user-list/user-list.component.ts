@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { UserCheckinService } from 'src/app/services/user-checkin.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-user-list',
@@ -20,12 +22,14 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private userCheckinService : UserCheckinService,
+    private route: ActivatedRoute,
+    private notification: NzNotificationService
     ) {}
 
   ngOnInit(): void {
     this.retrieveUsers();
-    this.getUser("63d8de599192774fce16adf5");
+    this.getUser(this.route.snapshot.params['id']);
   }
 
   getUser(id: string): void {
@@ -78,7 +82,27 @@ export class UserListComponent implements OnInit {
         });
   }
 
-  
-
   cancel(): void {}
+
+  checkinUser(id: string): void {
+    this.userCheckinService.checkin(id)
+        .subscribe({
+          next: (res) => {
+            this.notificationCheckinUser(id);
+            console.log(res);
+          },
+          error: (err) => console.log(err)
+        });
+  }
+
+  notificationCheckinUser(id: string): void {
+    this.notification
+        .blank(
+          'Checkin status',
+          `User id: ${id} checkin successfully`
+        )
+        .onClick.subscribe(() => {
+          console.log('notification clicked!')
+        })
+  }
 }

@@ -38,6 +38,13 @@ export class EditUserComponent {
     })
   }
 
+  ngOnInit(): void {
+    if(!this.viewMode) {
+      this.message = '';
+      this.getUser(this.route.snapshot.params['id']);
+    }
+  }
+
   submitForm(): void {
     if (this.validateForm.valid) {
       this.updateUser();
@@ -49,13 +56,6 @@ export class EditUserComponent {
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
-    }
-  }
-
-  ngOnInit(): void {
-    if(!this.viewMode) {
-      this.message = '';
-      this.getUser(this.route.snapshot.params['id']);
     }
   }
 

@@ -1,0 +1,17 @@
+<h4>List User Checkin Late</h4>
+<nz-table #listUserLate [nzData]="listuserlate">
+  <thead>
+    <tr>
+      <th>UserId</th>
+      <th>Name</th>
+      <th>Time Checkin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userLate of listUserLate.data">
+      <td>{{userLate.userId}}</td>
+      <td>{{userLate.name}}</td>
+      <td>{{userLate.timeCheckin}}</td>
+    </tr>
+  </tbody>
+</nz-table>
