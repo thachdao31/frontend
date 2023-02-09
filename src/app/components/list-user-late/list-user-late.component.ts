@@ -14,15 +14,15 @@ export class ListUserLateComponent {
   ngOnInit(): void {
     this.getListUserLate();
   }
-  formatDateTIme(time: string){
-    return new Date(time).toDateString();
+  formatDateTime(time: string){
+    return new Date(time).toUTCString();
   }
   getListUserLate(): void {
     this.userCheckinService.reportLateAllUser()
         .subscribe({
           next: (data) => {
             data.forEach(e =>{
-              e.timeCheckin = this.formatDateTIme(e.timeCheckin)
+              e.timeCheckin = this.formatDateTime(e.timeCheckin)
             })
             console.log(typeof(data[0].timeCheckin))
             this.listuserlate = data;
