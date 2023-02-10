@@ -8,15 +8,18 @@ import { UserCheckinService } from 'src/app/services/user-checkin.service';
 })
 export class ListUserLateComponent {
   listuserlate: any;
+  date: any;
 
   constructor(private userCheckinService: UserCheckinService) {}
 
   ngOnInit(): void {
     this.getListUserLate();
   }
+  
   formatDateTime(time: string){
-    return new Date(time).toUTCString();
+    return new Date(time).toLocaleString();
   }
+
   getListUserLate(): void {
     this.userCheckinService.reportLateAllUser()
         .subscribe({
@@ -24,12 +27,14 @@ export class ListUserLateComponent {
             data.forEach(e =>{
               e.timeCheckin = this.formatDateTime(e.timeCheckin)
             })
-            console.log(typeof(data[0].timeCheckin))
             this.listuserlate = data;
-            console.log(data);
-
           },
           error: (err) => console.log(err)
         })
+  }
+
+  onChange(result: Date): void {
+    this.date = result.toLocaleDateString();
+    console.log(this.date);
   }
 }

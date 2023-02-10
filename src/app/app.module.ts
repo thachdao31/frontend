@@ -13,6 +13,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { AppComponent } from './app.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { ListUserLateComponent } from './components/list-user-late/list-user-late.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,7 +30,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { ListUserLateComponent } from './components/list-user-late/list-user-late.component'; 
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ListUserLateComponent } from './components/list-user-late/list-user-lat
     NzModalModule,
     NzFormModule,
     NzInputNumberModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzDatePickerModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

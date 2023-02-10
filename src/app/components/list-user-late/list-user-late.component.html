@@ -1,6 +1,8 @@
 
 <div nz-col nzSpan="16" nzOffset="4">
   <h4>List User Checkin Late</h4>
+  <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+  <span>{{date}}</span>
 <nz-table #listUserLate [nzData]="listuserlate">
   <thead>
     <tr>
