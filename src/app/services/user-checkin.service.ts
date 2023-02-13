@@ -17,8 +17,8 @@ export class UserCheckinService {
     return this.http.post(baseUrl, body);
   }
 
-  reportLateAllUser(): Observable<UserCheckin[]> {
-    return this.http.get<UserCheckin[]>(baseUrl);
+  reportLateAllUser(date: Date): Observable<UserCheckin[]> {
+    return this.http.get<UserCheckin[]>(`${baseUrl}/${date}`);
   }
 
 

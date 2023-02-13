@@ -8,20 +8,20 @@ import { UserCheckinService } from 'src/app/services/user-checkin.service';
 })
 export class ListUserLateComponent {
   listuserlate: any;
-  date: any;
+  date= new Date();
 
   constructor(private userCheckinService: UserCheckinService) {}
 
   ngOnInit(): void {
-    this.getListUserLate();
+
   }
-  
+
   formatDateTime(time: string){
     return new Date(time).toLocaleString();
   }
 
   getListUserLate(): void {
-    this.userCheckinService.reportLateAllUser()
+    this.userCheckinService.reportLateAllUser(this.date)
         .subscribe({
           next: (data) => {
             data.forEach(e =>{
@@ -34,7 +34,7 @@ export class ListUserLateComponent {
   }
 
   onChange(result: Date): void {
-    this.date = result.toLocaleDateString();
+    this.date = result;
     console.log(this.date);
   }
 }
