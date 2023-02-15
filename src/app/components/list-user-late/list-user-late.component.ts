@@ -9,6 +9,7 @@ import { UserCheckinService } from 'src/app/services/user-checkin.service';
 export class ListUserLateComponent {
   listuserlate: any;
   date= new Date();
+  monthFormat = 'yyyy/MM';
 
   constructor(private userCheckinService: UserCheckinService) {}
 

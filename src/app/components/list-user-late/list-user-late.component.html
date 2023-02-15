@@ -1,7 +1,8 @@
 
 <div nz-col nzSpan="16" nzOffset="4">
   <h4>List User Checkin Late</h4>
-  <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+  
+  <nz-date-picker  [(ngModel)]="date" (ngModelChange)="onChange($event)" nzMode="month" [nzFormat]="monthFormat"></nz-date-picker>
   <button nz-button nzType="primary" (click)="getListUserLate()">
     <span nz-icon nzType="search"></span>
     Search

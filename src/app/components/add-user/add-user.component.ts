@@ -15,7 +15,7 @@ export class AddUserComponent {
     class: ''
   };
   submitted = false;
-
+ 
   validateForm: UntypedFormGroup;
 
   constructor(
