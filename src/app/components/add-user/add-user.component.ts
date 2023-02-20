@@ -15,7 +15,7 @@ export class AddUserComponent {
     class: ''
   };
   submitted = false;
- 
+
   validateForm: UntypedFormGroup;
 
   constructor(
@@ -23,8 +23,10 @@ export class AddUserComponent {
     private fb: UntypedFormBuilder
     ) {
       this.validateForm = this.fb.group({
-        name: ['', [Validators.required, Validators.pattern]],
-        age: ['', [Validators.required, Validators.pattern]],
+        name: this.fb.control('name', [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
+        // name: ['', [Validators.required, Validators.pattern]],
+        // age: ['20', [Validators.required, Validators.pattern]],
+        age: this.fb.control('', [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]),
         class: ['', [Validators.required]]
       })
     }

@@ -2,7 +2,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
     <nz-form-control [nzSpan]="20" nzHasFeedback  [nzErrorTip]="nameErrorTpl" >
-      <input [(ngModel)]="user.name" pattern="[a-zA-Z][a-zA-Z ]+" nz-input type="text" formControlName="name">
+      <input [(ngModel)]="user.name"  nz-input type="text" formControlName="name">
       <ng-template #nameErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required') ">Please input your name!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Only alphabetsallowed!</ng-container>
@@ -12,7 +12,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Age</nz-form-label>
     <nz-form-control [nzSpan]="20" nzHasFeedback [nzErrorTip]="ageErrorTpl">
-      <nz-input-number pattern="^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$" [(ngModel)]="user.age" type="number" nz-input name="age" formControlName="age"></nz-input-number>
+      <nz-input-number  [(ngModel)]="user.age" type="number" nz-input name="age" formControlName="age"></nz-input-number>
       <ng-template #ageErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">Please input your age!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Please enter a valid number between 1 and 100.</ng-container>
@@ -37,3 +37,7 @@
     <h4>User was submitted successfully!</h4>
   </nz-form-item>
 </form>
+
+<pre>
+  {{validateForm.value | json}}
+</pre>
