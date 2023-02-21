@@ -3,7 +3,7 @@
     <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
     <nz-form-control [nzSpan]="20" nzHasFeedback  [nzErrorTip]="nameErrorTpl" >
       <input [(ngModel)]="user.name"  nz-input type="text" formControlName="name">
-      <ng-template #nameErrorTpl let-control>
+      <ng-template #nameErrorTpl let-control let-control2>
         <ng-container *ngIf="control.hasError('required') ">Please input your name!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Only alphabetsallowed!</ng-container>
       </ng-template>

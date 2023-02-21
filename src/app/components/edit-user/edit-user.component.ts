@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -23,18 +23,21 @@ export class EditUserComponent {
 
   message = '';
 
-  validateForm: UntypedFormGroup;
+  validateForm: FormGroup;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder
   ) {
     this.validateForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern] ],
-      age: ['', [Validators.required, Validators.pattern]],
-      class: ['', [Validators.required]]
+      //name: ['', [Validators.required, Validators.pattern] ],
+      name: this.fb.control("", [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
+      //age: ['', [Validators.required, Validators.pattern]],
+      age: this.fb.control("", [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]),
+      //class: ['', [Validators.required]]
+      class: this.fb.control("", [Validators.required])
     })
   }
 
@@ -42,7 +45,8 @@ export class EditUserComponent {
     if(!this.viewMode) {
       this.message = '';
       this.getUser(this.route.snapshot.params['id']);
-    }
+    };
+
   }
 
   submitForm(): void {

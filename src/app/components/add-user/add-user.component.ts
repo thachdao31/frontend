@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-user',
@@ -16,20 +16,23 @@ export class AddUserComponent {
   };
   submitted = false;
 
-  validateForm: UntypedFormGroup;
+  validateForm: FormGroup;
 
   constructor(
     private userServices: UserService,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder
     ) {
       this.validateForm = this.fb.group({
         name: this.fb.control('name', [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
         // name: ['', [Validators.required, Validators.pattern]],
         // age: ['20', [Validators.required, Validators.pattern]],
         age: this.fb.control('', [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]),
-        class: ['', [Validators.required]]
+        //class: ['', [Validators.required]]
+        class: this.fb.control('', [Validators.required])
       })
     }
+
+    
 
     submitForm(): void {
       if (this.validateForm.valid) {
