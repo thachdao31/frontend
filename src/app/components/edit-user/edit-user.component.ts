@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { TitleCasePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-user',
@@ -23,14 +25,20 @@ export class EditUserComponent {
 
   message = '';
 
-  validateForm: FormGroup;
+  validateForm!: FormGroup;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    if(!this.viewMode) {
+      this.message = '';
+      this.getUser(this.route.snapshot.params['id']);
+    };
     this.validateForm = this.fb.group({
       //name: ['', [Validators.required, Validators.pattern] ],
       name: this.fb.control("", [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
@@ -39,14 +47,6 @@ export class EditUserComponent {
       //class: ['', [Validators.required]]
       class: this.fb.control("", [Validators.required])
     })
-  }
-
-  ngOnInit(): void {
-    if(!this.viewMode) {
-      this.message = '';
-      this.getUser(this.route.snapshot.params['id']);
-    };
-
   }
 
   submitForm(): void {

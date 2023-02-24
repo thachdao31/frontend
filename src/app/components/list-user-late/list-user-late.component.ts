@@ -11,7 +11,9 @@ export class ListUserLateComponent {
   date= new Date();
   monthFormat = 'yyyy/MM';
 
-  constructor(private userCheckinService: UserCheckinService) {}
+  constructor(
+    private userCheckinService: UserCheckinService
+    ) {}
 
   ngOnInit(): void {
 
