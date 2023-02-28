@@ -33,6 +33,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzInputNumberModule,
     NzNotificationModule,
     NzDatePickerModule,
-    NzIconModule
+    NzIconModule,
+    NzDropDownModule,
+    NzSelectModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

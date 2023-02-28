@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ export class AddUserComponent {
   };
   submitted = false;
 
-  test = ""
+  allClass: any;
 
   validateForm!: FormGroup;
 
@@ -29,19 +29,20 @@ export class AddUserComponent {
 
     ngOnInit(): void {
       this.validateForm = this.fb.group({
-        name: this.fb.control('name', [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
-        // name: ['', [Validators.required, Validators.pattern]],
-        // age: ['20', [Validators.required, Validators.pattern]],
-        age: this.fb.control('', [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]),
-        //class: ['', [Validators.required]]
-        class: this.fb.control('', [Validators.required])
+        name: ['', [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]],
+        age: ['', [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]],
+        class: ['', [Validators.required]]
       });
+      this.getAllClass();
     }
 
-    transformName(name: string): void {
-      this.user.name = this.titleCasePipe.transform(name);
+    ngOnChanges(changes: SimpleChanges): void {
+
     }
 
+    transformName() {
+      return this.titleCasePipe.transform(this.user.name);
+    }
 
     submitForm(): void {
       if (this.validateForm.valid) {
@@ -59,7 +60,7 @@ export class AddUserComponent {
 
   saveUser(): void {
     const data = {
-      name: this.user.name,
+      name: this.transformName(),
       age: this.user.age,
       class: this.user.class
     };
@@ -81,5 +82,16 @@ export class AddUserComponent {
       age: 0,
       class: ''
     }
+  }
+
+  getAllClass(): void {
+    this.userServices.getClass()
+        .subscribe({
+          next: (data) => {
+            this.allClass = data;
+            console.log(this.allClass)
+          },
+          error: (err) => console.log(err)
+        })
   }
 }

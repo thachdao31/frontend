@@ -20,6 +20,8 @@ export class UserListComponent implements OnInit {
   };
   currentIndex = -1;
 
+
+
   constructor(
     private userService: UserService,
     private userCheckinService : UserCheckinService,

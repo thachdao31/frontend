@@ -1,9 +1,9 @@
-<form nz-form [formGroup]="validateForm">
+<form nz-form [formGroup]="validateForm" >
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
     <nz-form-control [nzSpan]="20" nzHasFeedback  [nzErrorTip]="nameErrorTpl" >
       <input  [(ngModel)]="user.name" nz-input type="text" formControlName="name">
-      <ng-template #nameErrorTpl let-control let-control2>
+      <ng-template #nameErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required') ">Please input your name!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Only alphabetsallowed!</ng-container>
       </ng-template>
@@ -22,12 +22,19 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Class</nz-form-label>
     <nz-form-control [nzSpan]="20" nzHasFeedback [nzErrorTip]="classErrorTpl">
-      <input [(ngModel)]="user.class" nz-input name="class" type="text" formControlName="class">
+        <nz-select
+        [(ngModel)]="user.class"
+        nzAllowClear
+        nzPlaceHolder="Choose Class"
+        formControlName="class"
+      >
+        <nz-option  *ngFor="let objclass of allClass" [nzValue]="objclass.class" [nzLabel]="objclass.class"></nz-option>
+      </nz-select>
       <ng-template #classErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">Please input your class!</ng-container>
       </ng-template>
     </nz-form-control>
-  </nz-form-item >
+  </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzOffset]="6" [nzSpan]="12">
       <button nz-button nzType="primary" nzSize="large" (click)="submitForm()">Submit</button>

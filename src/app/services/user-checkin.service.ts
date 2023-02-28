@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserCheckin } from '../models/user-checkin.model'
 
-const baseUrl = "http://localhost:3030/api/user/checkin"
+const baseUrl = "http://localhost:3030/api/users/checkin"
 
 @Injectable({
   providedIn: 'root'

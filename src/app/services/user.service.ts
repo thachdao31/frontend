@@ -39,4 +39,8 @@ export class UserService {
   findByName(name: any): Observable<User[]> {
     return this.http.get<User[]>(`${baseUrl}?name=${name}`)
   }
+
+  getClass(): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/test/test1`)
+  }
 }
