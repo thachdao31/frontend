@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
@@ -9,8 +9,8 @@ import { TitleCasePipe } from '@angular/common';
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
-export class AddUserComponent {
-  user: User = {
+export class AddUserComponent implements OnInit, OnChanges {
+  @Input() user: User = {
     name: '',
     age: 0,
     class: ''
@@ -37,7 +37,7 @@ export class AddUserComponent {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-
+      console.log(changes);
     }
 
     transformName() {
@@ -89,7 +89,6 @@ export class AddUserComponent {
         .subscribe({
           next: (data) => {
             this.allClass = data;
-            console.log(this.allClass)
           },
           error: (err) => console.log(err)
         })
