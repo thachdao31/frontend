@@ -1,6 +1,5 @@
 
   <div nz-col nzSpan="16" nzOffset="4">
-    <h4>List User</h4>
   <nz-table #userListTable [nzData]="users">
     <thead>
       <tr>
@@ -15,14 +14,17 @@
         <td>{{user.name}}</td>
         <td>{{user.age}}</td>
         <td>{{user.class}}</td>
-        <td>
+        <td style="text-align: end;">
         <button
+        nzShape="round"
         nz-button
         [nzType]="'primary'"
         routerLink="/edit/{{user._id }}">
-          <span>Edit</span>
+        <span nz-icon nzType="edit" nzTheme="outline"></span>
+          <!-- <span>Edit</span> -->
         </button>
         <button
+        nzShape="round"
         nzType="primary"
         nz-popconfirm
         nzPopconfirmTitle="Are you sure delete this user?"
@@ -32,14 +34,17 @@
         nz-button
         nzDanger
       >
-        Delete
+      <span nz-icon nzType="user-delete" nzTheme="outline"></span>
+
       </button>
       <button
+        nzShape="round"
         nz-button
         [nzType]="'primary'"
         (click)="checkinUser(user._id)"
         >
-          <span>Checkin</span>
+        <span  nz-icon nzType="check-circle" nzTheme="outline"></span>
+         Checkin
         </button>
       </td>
       </tr>
