@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { UserCheckinService } from 'src/app/services/user-checkin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-user-list',
@@ -20,18 +21,45 @@ export class UserListComponent implements OnInit {
   };
   currentIndex = -1;
 
+  isVisible = false;
 
+  @ViewChild(AddUserComponent) child!: AddUserComponent;
 
   constructor(
     private userService: UserService,
     private userCheckinService : UserCheckinService,
     private route: ActivatedRoute,
     private notification: NzNotificationService
-    ) {}
+    ) {
+
+    }
 
   ngOnInit(): void {
     this.retrieveUsers();
     this.getUser(this.route.snapshot.params['id']);
+    //this.child.submitForm();
+  }
+
+  // ngAfterViewInit() {
+  //   this.child.submitForm();
+  // }
+
+  
+  showModal() {
+    this.isVisible = true
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    if(this.child.submitForm() == true) {
+      this.isVisible = false;
+      this.refreshList();
+    }
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   getUser(id: string): void {

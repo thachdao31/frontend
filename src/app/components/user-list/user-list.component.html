@@ -1,5 +1,15 @@
 
   <div nz-col nzSpan="16" nzOffset="4">
+    <div style="margin: 10px 0 10px 0;">
+      <button nz-button nzShape="round" (click)="showModal()">
+        <span style="font-size: 20px;" nz-icon nzType="user-add" nzTheme="outline"></span> Add User
+      </button>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="Add new user" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <app-add-user #test ></app-add-user>
+        </ng-container>
+      </nz-modal>
+    </div>
   <nz-table #userListTable [nzData]="users">
     <thead>
       <tr>

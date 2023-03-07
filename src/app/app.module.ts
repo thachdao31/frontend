@@ -36,6 +36,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
     NzIconModule,
     NzDropDownModule,
     NzSelectModule,
-    NzPageHeaderModule
+    NzPageHeaderModule,
+    NzGridModule,
+    NzInputModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

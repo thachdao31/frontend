@@ -1,8 +1,8 @@
 <form nz-form [formGroup]="validateForm" >
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
-    <nz-form-control [nzSpan]="20" nzHasFeedback  [nzErrorTip]="nameErrorTpl" >
-      <input  [(ngModel)]="user.name" nz-input type="text" formControlName="name">
+  <nz-form-item nz-row>
+    <nz-form-label nzSpan="6" nzRequired>Name</nz-form-label>
+    <nz-form-control nzSpan="10" nzHasFeedback  [nzErrorTip]="nameErrorTpl" >
+      <input [(ngModel)]="user.name" nz-input width="" formControlName="name">
       <ng-template #nameErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required') ">Please input your name!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Only alphabetsallowed!</ng-container>
@@ -11,8 +11,8 @@
   </nz-form-item >
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Age</nz-form-label>
-    <nz-form-control [nzSpan]="20" nzHasFeedback [nzErrorTip]="ageErrorTpl">
-      <nz-input-number  [(ngModel)]="user.age" type="number" nz-input name="age" formControlName="age"></nz-input-number>
+    <nz-form-control nzHasFeedback [nzErrorTip]="ageErrorTpl">
+      <nz-input-number nz-input width="large" [(ngModel)]="user.age" name="age" formControlName="age"></nz-input-number>
       <ng-template #ageErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">Please input your age!</ng-container>
         <ng-container *ngIf="control.hasError('pattern')">Please enter a valid number between 1 and 100.</ng-container>
@@ -21,12 +21,13 @@
   </nz-form-item >
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzRequired>Class</nz-form-label>
-    <nz-form-control [nzSpan]="20" nzHasFeedback [nzErrorTip]="classErrorTpl">
+    <nz-form-control nzSpan="10" nzHasFeedback [nzErrorTip]="classErrorTpl">
         <nz-select
         [(ngModel)]="user.class"
         nzAllowClear
         nzPlaceHolder="Choose Class"
         formControlName="class"
+
       >
         <nz-option  *ngFor="let objclass of allClass" [nzValue]="objclass.class" [nzLabel]="objclass.class"></nz-option>
       </nz-select>
@@ -35,16 +36,13 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <!-- <nz-form-item>
     <nz-form-control [nzOffset]="6" [nzSpan]="12">
-      <button nz-button nzType="primary" nzSize="large" (click)="submitForm()">Submit</button>
+      <button nz-button nzType="primary" nzSize="default" (click)="submitForm()">Submit</button>
     </nz-form-control>
-  </nz-form-item>
+  </nz-form-item> -->
   <nz-form-item *ngIf="submitted">
     <h4>User was submitted successfully!</h4>
   </nz-form-item>
 </form>
 
-<pre>
-  {{validateForm.value | json | titlecase}}
-</pre>

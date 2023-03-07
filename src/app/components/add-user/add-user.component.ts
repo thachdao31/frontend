@@ -15,6 +15,8 @@ export class AddUserComponent implements OnInit, OnChanges {
     age: 0,
     class: ''
   };
+
+  valuenamechange = '';
   submitted = false;
 
   allClass: any;
@@ -37,17 +39,14 @@ export class AddUserComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-      console.log(changes);
+
     }
 
-    transformName() {
-      return this.titleCasePipe.transform(this.user.name);
-    }
-
-    submitForm(): void {
+    submitForm() {
       if (this.validateForm.valid) {
-        this.saveUser()
+        this.saveUser();
         console.log('submit', this.validateForm.value);
+        return true;
       } else {
         Object.values(this.validateForm.controls).forEach(control => {
           if (control.invalid) {
@@ -55,12 +54,13 @@ export class AddUserComponent implements OnInit, OnChanges {
             control.updateValueAndValidity({ onlySelf: true });
           }
         });
+        return false;
       }
     }
 
   saveUser(): void {
     const data = {
-      name: this.transformName(),
+      name: this.user.name,
       age: this.user.age,
       class: this.user.class
     };
