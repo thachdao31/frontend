@@ -1,12 +1,12 @@
 
   <div nz-col nzSpan="16" nzOffset="4">
     <div style="margin: 10px 0 10px 0;">
-      <button nz-button nzShape="round" (click)="showModal()">
+      <button nz-button nzShape="round" (click)="showModalAddUser()">
         <span style="font-size: 20px;" nz-icon nzType="user-add" nzTheme="outline"></span> Add User
       </button>
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="Add new user" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <nz-modal [(nzVisible)]="isVisibleModalAddUser" nzTitle="Add new user" (nzOnCancel)="handleCancel()" (nzOnOk)="handleSubmitAddUser()">
         <ng-container *nzModalContent>
-          <app-add-user #test ></app-add-user>
+          <app-add-user ></app-add-user>
         </ng-container>
       </nz-modal>
     </div>
@@ -29,10 +29,16 @@
         nzShape="round"
         nz-button
         [nzType]="'primary'"
-        routerLink="/edit/{{user._id }}">
+        (click)="showModalEditUser()" >
         <span nz-icon nzType="edit" nzTheme="outline"></span>
           <!-- <span>Edit</span> -->
         </button>
+        <pre>{{user._id}}</pre>
+        <nz-modal [(nzVisible)]="isVisibleModalEditUser" nzTitle="Edit user" (nzOnCancel)="handleCancel()">
+          <ng-container *nzModalContent>
+            <app-edit-user [currentUserId]="user._id"></app-edit-user>
+          </ng-container>
+        </nz-modal>
         <button
         nzShape="round"
         nzType="primary"

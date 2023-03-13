@@ -42,7 +42,7 @@ export class AddUserComponent implements OnInit, OnChanges {
 
     }
 
-    submitForm() {
+    submitForm(){
       if (this.validateForm.valid) {
         this.saveUser();
         console.log('submit', this.validateForm.value);

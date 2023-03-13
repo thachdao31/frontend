@@ -5,6 +5,7 @@ import { UserCheckinService } from 'src/app/services/user-checkin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user-list',
@@ -21,45 +22,52 @@ export class UserListComponent implements OnInit {
   };
   currentIndex = -1;
 
-  isVisible = false;
+  isVisibleModalAddUser = false;
 
-  @ViewChild(AddUserComponent) child!: AddUserComponent;
+  isVisibleModalEditUser = false;
+
+  @ViewChild(AddUserComponent) childAddUser: AddUserComponent;
+  @ViewChild(EditUserComponent) childEditUser: EditUserComponent;
 
   constructor(
     private userService: UserService,
     private userCheckinService : UserCheckinService,
     private route: ActivatedRoute,
-    private notification: NzNotificationService
-    ) {
-
-    }
+    private notification: NzNotificationService,
+    ) {}
 
   ngOnInit(): void {
     this.retrieveUsers();
     this.getUser(this.route.snapshot.params['id']);
-    //this.child.submitForm();
   }
 
-  // ngAfterViewInit() {
-  //   this.child.submitForm();
-  // }
-
-  
-  showModal() {
-    this.isVisible = true
+  ngAfterViewInit(): void {
+    this.childAddUser.submitForm();
   }
 
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    if(this.child.submitForm() == true) {
-      this.isVisible = false;
+  showModalAddUser() {
+    this.isVisibleModalAddUser = true;
+  }
+
+  showModalEditUser() {
+    this.isVisibleModalEditUser = true;
+  }
+
+  handleSubmitAddUser(): void {
+    this.refreshList();
+    if(this.childAddUser.submitForm() === true) {
+      console.log("tesst");
+      this.isVisibleModalAddUser = false;
       this.refreshList();
+    } else {
+      this.isVisibleModalAddUser = true;
     }
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible = false;
+    this.isVisibleModalAddUser = false;
+    this.isVisibleModalEditUser = false;
   }
 
   getUser(id: string): void {

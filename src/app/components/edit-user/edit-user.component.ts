@@ -23,6 +23,8 @@ export class EditUserComponent {
     class: ''
   };
 
+  @Input() currentUserId = "";
+
   message = '';
 
   validateForm!: FormGroup;
@@ -37,7 +39,7 @@ export class EditUserComponent {
   ngOnInit(): void {
     if(!this.viewMode) {
       this.message = '';
-      this.getUser(this.route.snapshot.params['id']);
+      this.getUser(this.currentUserId);
     };
     this.validateForm = this.fb.group({
       //name: ['', [Validators.required, Validators.pattern] ],
