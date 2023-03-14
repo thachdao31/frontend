@@ -13,6 +13,7 @@
   <nz-table #userListTable [nzData]="users">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Age</th>
         <th>Class</th>
@@ -20,25 +21,14 @@
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let user of userListTable.data">
+      <tr *ngFor="let user of userListTable.data ">
+        <td>{{user._id}}</td>
         <td>{{user.name}}</td>
         <td>{{user.age}}</td>
         <td>{{user.class}}</td>
         <td style="text-align: end;">
-        <button
-        nzShape="round"
-        nz-button
-        [nzType]="'primary'"
-        (click)="showModalEditUser()" >
-        <span nz-icon nzType="edit" nzTheme="outline"></span>
-          <!-- <span>Edit</span> -->
-        </button>
-        <pre>{{user._id}}</pre>
-        <nz-modal [(nzVisible)]="isVisibleModalEditUser" nzTitle="Edit user" (nzOnCancel)="handleCancel()">
-          <ng-container *nzModalContent>
-            <app-edit-user [currentUserId]="user._id"></app-edit-user>
-          </ng-container>
-        </nz-modal>
+        <app-edit-user [currentUserId]="user._id"></app-edit-user>
+
         <button
         nzShape="round"
         nzType="primary"

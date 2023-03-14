@@ -24,14 +24,11 @@ export class UserListComponent implements OnInit {
 
   isVisibleModalAddUser = false;
 
-  isVisibleModalEditUser = false;
-
   @ViewChild(AddUserComponent) childAddUser: AddUserComponent;
-  @ViewChild(EditUserComponent) childEditUser: EditUserComponent;
 
   constructor(
     private userService: UserService,
-    private userCheckinService : UserCheckinService,
+    private userCheckinService: UserCheckinService,
     private route: ActivatedRoute,
     private notification: NzNotificationService,
     ) {}
@@ -49,10 +46,6 @@ export class UserListComponent implements OnInit {
     this.isVisibleModalAddUser = true;
   }
 
-  showModalEditUser() {
-    this.isVisibleModalEditUser = true;
-  }
-
   handleSubmitAddUser(): void {
     this.refreshList();
     if(this.childAddUser.submitForm() === true) {
@@ -67,7 +60,6 @@ export class UserListComponent implements OnInit {
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisibleModalAddUser = false;
-    this.isVisibleModalEditUser = false;
   }
 
   getUser(id: string): void {
@@ -93,6 +85,7 @@ export class UserListComponent implements OnInit {
   }
 
   refreshList(): void {
+    console.log("call func refresh in user list component");
     this.retrieveUsers();
     this.currentUser = {};
     this.currentIndex = -1;

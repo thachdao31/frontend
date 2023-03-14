@@ -1,21 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { TitleCasePipe } from '@angular/common';
+import { UserListComponent } from '../user-list/user-list.component';
 
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css'],
+  providers: [UserListComponent]
 })
 
-export class EditUserComponent {
-  @Input() viewMode = false;
-
+export class EditUserComponent{
   @Input() currentUser: User = {
     _id: '',
     name: '',
@@ -27,35 +27,35 @@ export class EditUserComponent {
 
   message = '';
 
+  isVisible = false;
+
   validateForm!: FormGroup;
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private listUser: UserListComponent
   ) {}
 
+
   ngOnInit(): void {
-    if(!this.viewMode) {
       this.message = '';
       this.getUser(this.currentUserId);
-    };
+
     this.validateForm = this.fb.group({
-      //name: ['', [Validators.required, Validators.pattern] ],
       name: this.fb.control("", [Validators.required, Validators.pattern("[a-zA-Z][a-zA-Z ]+")]),
-      //age: ['', [Validators.required, Validators.pattern]],
       age: this.fb.control("", [Validators.required, Validators.pattern("^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|100)$")]),
-      //class: ['', [Validators.required]]
       class: this.fb.control("", [Validators.required])
     })
   }
 
   submitForm(): void {
-    if (this.validateForm.valid) {
+    if(this.validateForm.valid) {
+      console.log("submit")
       this.updateUser();
-      console.log('submit', this.validateForm.value);
+      this.isVisible = false;
     } else {
+      this.isVisible = true;
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
@@ -63,6 +63,7 @@ export class EditUserComponent {
         }
       });
     }
+    this.listUser.refreshList();
   }
 
   getUser(id: string): void {
@@ -70,7 +71,6 @@ export class EditUserComponent {
         .subscribe({
           next: (data) => {
             this.currentUser = data;
-            console.log(data);
           },
           error: (err) => console.log(err)
         });
@@ -90,10 +90,21 @@ export class EditUserComponent {
         next: (res) => {
           console.log(res);
           this.message = res.message ? res.message : 'updated successfully!';
-          this.router.navigate(['/']);
         },
         error: (e) => console.error(e)
       });
   }
-}
 
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+
+  handleOK(): void {
+    this.submitForm();
+    this.listUser.refreshList();
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+}
